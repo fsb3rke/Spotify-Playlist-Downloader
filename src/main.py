@@ -35,6 +35,6 @@ for i in range(len(track_names)):
         new_file = base + ".mp3"
         os.rename(out_file, new_file)
 
-        print(f" {Fore.MAGENTA}{str(i)}{Style.RESET_ALL} {Fore.GREEN}{yt.title} has been successfully downloaded.{Style.RESET_ALL}\n")
+        print(f" {Fore.MAGENTA}{str(i+1)}/{str(len(track_names))}{Style.RESET_ALL} {Fore.GREEN}{yt.title} has been successfully downloaded.{Style.RESET_ALL}\n")
     except:
-        print(f" {Fore.MAGENTA}{str(i)}{Style.RESET_ALL} {Fore.RED}{yt.title} hasn't been successfully downloaded.{Style.RESET_ALL}\n")
+        print(f" {Fore.MAGENTA}{str(i+1)}/{str(len(track_names))}{Style.RESET_ALL} {Fore.RED}{yt.title} hasn't been successfully downloaded.{Style.RESET_ALL}\n")
