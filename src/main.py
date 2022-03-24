@@ -1,5 +1,6 @@
 import os
 import sys
+from tkinter.filedialog import askdirectory
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 from pytube import YouTube
@@ -14,6 +15,8 @@ sp = spotipy.Spotify(auth_manager=SpotifyClientCredentials(client_id=client_id,
 playlist_id = sys.argv[1]
 track_names = [x["track"]["name"] for x in sp.playlist_tracks(playlist_id)["tracks"]["items"]]
 
+directory = askdirectory()
+
 for i in track_names:
     video = VideosSearch(i, limit = 1)
     videoID = video.result()["result"][0]["id"]
@@ -22,7 +25,7 @@ for i in track_names:
 
     yt = YouTube(videoLINK)
     vid = yt.streams.filter(only_audio=True).first()
-    out_file = vid.download(output_path=f"./{sp.playlist(playlist_id)['name']}")
+    out_file = vid.download(output_path=f"{directory}/{sp.playlist(playlist_id)['name']}")
 
     base, ext = os.path.splitext(out_file)
     new_file = base + ".mp3"
