@@ -17,12 +17,12 @@ track_names = [x["track"]["name"] for x in sp.playlist_tracks(playlist_id)["trac
 for i in track_names:
     video = VideosSearch(i, limit = 1)
     videoID = video.result()["result"][0]["id"]
-    videoLINK = "https://www.youtube.com/watch?v="+videoID
+    videoLINK = f"https://www.youtube.com/watch?v={videoID}"
     print(videoLINK)
 
     yt = YouTube(videoLINK)
     vid = yt.streams.filter(only_audio=True).first()
-    out_file = vid.download(output_path=".")
+    out_file = vid.download(output_path=f"./{sp.playlist(playlist_id)['name']}")
 
     base, ext = os.path.splitext(out_file)
     new_file = base + ".mp3"
